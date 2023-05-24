@@ -278,11 +278,8 @@ def run(input_file, prefix, build, force, oformat, verbose):
     logger.info(click.style(f"Drawing chromosome ideogram using {input_file}", fg="blue"))
     if os.path.exists(f"{prefix}.svg") and force is False:
         logger.info(click.style(f"'{prefix}.svg' already exists.", fg="yellow"))
-        OW = input(f"Overwrite {prefix}.svg? [Y/n]: ") or "y"
-        if OW.lower() != "y":
-            exit(click.style("'quyuan will now exit...", fg="red"))
-        else:
-            click.secho(f"Overwriting existing file and saving to: {prefix}.svg", fg="blue")
+        click.confirm(f"Overwrite {prefix}.svg?", abort=True)
+        click.secho(f"Overwriting existing file and saving to: {prefix}.svg", fg="blue")
     else:
         logger.info(click.style(f"Saving to: {prefix}.svg", fg="blue"))
     draw(svg_header, svg_footer, input_file, prefix, build, verbose)
