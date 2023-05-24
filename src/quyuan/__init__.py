@@ -1,1 +1,1 @@
-from .main import printif
+"""a utility for illustrating human and other species chromosomes"""
