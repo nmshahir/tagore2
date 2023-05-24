@@ -5,7 +5,7 @@ from os import getcwd, pardir, path
 import pytest
 
 sys.path.append(path.abspath(path.join(getcwd())))
-from tagore import printif
+from quyuan import printif
 
 
 def test_printif_true():

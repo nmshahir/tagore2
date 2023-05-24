@@ -1,3 +1,48 @@
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "quyuan"
+version = "0.1.0"
+authors = [
+    { name = "Tang Ziya" },
+    { name = "Applied Bioinformatics Laboratory", email = "abil@ihrc.com" },
+]
+description = "A simple way to visualize features on human and other species chromosome ideograms, folk of jordanlab/tagore"
+readme = "README.md"
+keywords = [
+    "Human",
+    "chromosome",
+    "ideogram",
+    "visualization",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Environment :: Console",
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+requires-python = ">=3.6"
+dependencies = [
+    "click",
+    "colorama",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+quyuan = "quyuan.main:run"
+rfmix2tagore = "quyuan.scripts.rfmix2tagore:main"
+
+[project.urls]
+homepage = "https://github.com/tcztzy/quyuan"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["quyuan.tests*"]
+
+[tool.setuptools.package-data]
+quyuan = ["*.svg.g"]
