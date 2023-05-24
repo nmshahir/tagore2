@@ -45,4 +45,4 @@ where = ["src"]
 exclude = ["quyuan.tests*"]
 
 [tool.setuptools.package-data]
-quyuan = ["*.svg.g"]
+quyuan = ["*.svg.g", "*.json"]
