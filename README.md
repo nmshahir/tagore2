@@ -1,4 +1,4 @@
-   * [tagore](#tagore)  
+   * [quyuan](#quyuan)  
       * [Installation](#installation)  
          * [Requirements](#requirements)  
       * [Quick start](#quick-start)  
@@ -6,28 +6,27 @@
       * [Input file description](#input-file-description)  
       * [Etymology](#etymology)  
 
-# tagore
+# quyuan
 
-`tagore` is a simple way to visualize features on human chromosome ideograms as shown in this article: https://www.nature.com/articles/srep12376
-
-`tagore` was designed to allow everyone to create 23andMe style chromosome painting diagrams.
+`quyuan` is a folk of [`tagore`](https://github.com/jordanlab/tagore) with several modifications to make it more suitable for my own use.
 
 ![tagore](https://github.com/jordanlab/tagore/raw/master/tagore.png)
 
 ## Installation
 
-`tagore` is a simple Python script that uses the RSVG library and has no other depenendies.
+`quyuan` is a simple Python script with several dependencies.
 
-```bash
-pip install tagore
-tagore --version
-# tagore (version 1.1.2)
+```console
+$ pip install git+https://github.com/tcztzy/quyuan.git
+$ quyuan --version
+quyuan, version 1.1.2
 ```
 
 ### Requirements
 * Python 3.6+
-* [RSVG](https://developer.gnome.org/rsvg/stable/)
-* [Click](https://click.palletsprojects.com/en/7.x/) (automatically installed if `pip` is used)
+* [CairoSVG](https://cairosvg.org/)
+* [Click](https://click.palletsprojects.com/en/7.x/)
+* [Colorama](https://pypi.org/project/colorama/)
 
 ## Quick start
 
@@ -39,19 +38,22 @@ tagore --input example_ideogram/test.bed --prefix example_ideogram/example -vf
 
 ## Usage
 ```
-usage: tagore [-h] [--version] -i <input.bed> [-p [output file prefix]] [-b [hg78/hg38]] [-f] [-v]
+Usage: quyuan [OPTIONS]
 
-tagore: a utility for illustrating human chromosomes https://github.com/jordanlab/tagore
+  quyuan: a utility for illustrating human chromosomes
+  https://github.com/tcztzy/quyuan
 
-optional arguments:
-  -h, --help                                              show this help message and exit
-  --version                                               Print the software version
-  -i <input.bed>, --input <input.bed>                     Input BED-like file
-  -p [output file prefix], --prefix [output file prefix]  Output prefix [Default: "out"]
-  -b [hg78/hg38], --build [hg78/hg38]                     Human genome build to use [Default: hg38]
-  -f, --force                                             Overwrite output files if they exist already
-  -v, --verbose                                           Display verbose output
-
+Options:
+  --version                       Show the version and exit.
+  -i, --input <input.bed>         Input BED-like file  [required]
+  -p, --prefix [output file prefix]
+                                  Output prefix [Default: "out"]
+  -b, --build [hg37|hg38|irgsp1]  Human genome build to use [Default: hg38]
+  -f, --force                     Overwrite output files if they exist already
+  -ofmt, --oformat [png|pdf|ps|svg]
+                                  Output format for conversion
+  -v, --verbose                   Display verbose output
+  --help                          Show this message and exit.
 ```
 The input file is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
 
@@ -64,7 +66,7 @@ rfmix2tagore --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
 	--chr2 example_ideogram/1KGP-MXL104_chr2.bed \
 	--out example_ideogram/1KGP-MXL104_tagore.bed
 
-tagore --input example_ideogram/1KGP-MXL104_tagore.bed \
+quyuan --input example_ideogram/1KGP-MXL104_tagore.bed \
 	--prefix example_ideogram/1KGP-MXL104 \
   --build hg37 \
   --verbose
@@ -95,7 +97,4 @@ Each column is explained below:
 
 ## Etymology
 
-[Tagore](https://en.wikipedia.org/wiki/Rabindranath_Tagore) (/tæˈgɔːr/) was a prolific songwriter,
- artist, and influential poet of 19th and 20th century India.  Notably, Tagore spoke out against
- racial prejudice and espoused the princple respect for all people, regardless of ancestry or
- ethnic bacground.
+[Qu Yuan](https://en.wikipedia.org/wiki/Qu_Yuan) (屈原) was a Chinese patriot poet and politician living in c.340BC - 278BC.
