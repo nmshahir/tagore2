@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "quyuan"
-version = "0.1.0"
+dynamic = ["version"]
 authors = [
-    { name = "Tang Ziya" },
+    { name = "Tang Ziya", email = "tang@stu.njau.edu.cn" },
     { name = "Applied Bioinformatics Laboratory", email = "abil@ihrc.com" },
 ]
 description = "A simple way to visualize features on human and other species chromosome ideograms, folk of jordanlab/tagore"
@@ -29,6 +29,7 @@ dependencies = [
     "cairosvg",
     "click",
     "colorama",
+    "importlib_metadata; python_version<'3.8'",
 ]
 
 [project.optional-dependencies]
@@ -47,3 +48,6 @@ exclude = ["quyuan.tests*"]
 
 [tool.setuptools.package-data]
 quyuan = ["*.svg.g", "*.json"]
+
+[tool.setuptools_scm]
+write_to = "src/quyuan/_version.py"

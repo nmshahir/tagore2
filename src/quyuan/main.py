@@ -17,12 +17,12 @@ import re
 import cairosvg
 import click
 
+from quyuan import __version__
+
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
 handler.setLevel(logging.INFO)
 logger.addHandler(handler)
-
-VERSION = "1.1.2"
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -198,7 +198,7 @@ def draw(svg_header, svg_footer, input_file, prefix, build):
 
 
 @click.command(name="quyuan")
-@click.version_option(version=VERSION)
+@click.version_option(version=__version__)
 @click.option(
     "-i",
     "--input",
