@@ -52,11 +52,10 @@ COORDINATES = {
     "Y": {"cx": 2120.9, "cy": 2451.6, "ht": 382.7, "width": 118.6},
 }
 
-with open(os.path.join(os.path.dirname(__file__), "chrom_sizes.json")) as json_file:
-    CHROM_SIZES: dict = json.load(json_file)
+CHROM_SIZES: dict = json.loads(pkgutil.get_data("quyuan", "chrom_sizes.json"))
 
 
-def draw(svg_header, svg_footer, input_file, prefix, build, verbose):
+def draw(svg_header, svg_footer, input_file, prefix, build):
     """
     Create the SVG object
     """
@@ -282,7 +281,7 @@ def run(input_file, prefix, build, force, oformat, verbose):
         click.secho(f"Overwriting existing file and saving to: {prefix}.svg", fg="blue")
     else:
         logger.info(click.style(f"Saving to: {prefix}.svg", fg="blue"))
-    draw(svg_header, svg_footer, input_file, prefix, build, verbose)
+    draw(svg_header, svg_footer, input_file, prefix, build)
     logger.info(click.style(f"Converting {prefix}.svg -> {prefix}.{oformat} ",fg="blue"))
     try:
         if is_rsvg_installed:
