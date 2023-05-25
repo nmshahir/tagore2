@@ -8,14 +8,13 @@ __copyright__ = "Copyright 2019, Applied Bioinformatics Lab"
 __license__ = "GPLv3"
 
 import json
+import logging
 import os
 import pickle
 import pkgutil
 import re
-import shutil
-import logging
-import subprocess
 
+import cairosvg
 import click
 
 logger = logging.getLogger(__name__)
@@ -238,8 +237,8 @@ def draw(svg_header, svg_footer, input_file, prefix, build):
     "--oformat",
     required=False,
     default="png",
-    type=click.Choice(["png", "pdf"], case_sensitive=False),
-    help="Output format for conversion (pdf requires rsvg-convert)",
+    type=click.Choice(["png", "pdf", "ps", "svg"], case_sensitive=False),
+    help="Output format for conversion",
 )
 @click.option(
     "-v",
@@ -259,19 +258,6 @@ def run(input_file, prefix, build, force, oformat, verbose):
     if build not in CHROM_SIZES:
         exit(click.style(f"Build must be on of {CHROM_SIZES.keys()}, you supplied {build}.", fg="red"))
 
-    if shutil.which("rsvg-convert", mode=os.X_OK) is None:
-        if shutil.which("rsvg", mode=os.X_OK) is None:
-            exit(click.style(f"Could not find `rsvg` or `rsvg-convert` in PATH.", fg="red"))
-        else:
-            is_rsvg_installed = True
-            if oformat != "png":
-                click.secho(f"`rsvg` only supports PNG output, using png", fg="yellow")
-                oformat = "png"
-    else:
-        is_rsvg_installed = False
-        if oformat not in ["png", "pdf"]:
-            click.secho(f"{oformat} is not PNG or PDF, using PNG", fg="yellow")
-            oformat = "png"
     svg_pkl_data = pkgutil.get_data("quyuan", "base.svg.p")
     svg_header, svg_footer = pickle.loads(svg_pkl_data)
     logger.info(click.style(f"Drawing chromosome ideogram using {input_file}", fg="blue"))
@@ -284,19 +270,10 @@ def run(input_file, prefix, build, force, oformat, verbose):
     draw(svg_header, svg_footer, input_file, prefix, build)
     logger.info(click.style(f"Converting {prefix}.svg -> {prefix}.{oformat} ",fg="blue"))
     try:
-        if is_rsvg_installed:
-            subprocess.check_output(
-                f"rsvg {prefix}.svg {prefix}.{oformat} ",
-                shell=True,
-            )
-        else:
-            subprocess.check_output(
-                f"rsvg-convert -o {prefix}.{oformat} -f {oformat} {prefix}.svg ",
-                shell=True,
-            )
-    except subprocess.CalledProcessError as rsvg_e:
+        getattr(cairosvg, f"svg2{oformat}")(url=f"{prefix}.svg", write_to=f"{prefix}.{oformat}")
+    except Exception as e:
         logger.info(click.style(f"Failed SVG to PNG conversion...", fg="red"))
-        raise rsvg_e
+        raise e
     finally:
         logger.info(click.style(
             f"Successfully converted SVG to {oformat.upper()}",
