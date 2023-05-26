@@ -30,6 +30,7 @@ dependencies = [
     "click",
     "colorama",
     "importlib_metadata; python_version<'3.8'",
+    "svg.py"
 ]
 
 [project.optional-dependencies]
@@ -47,7 +48,7 @@ where = ["src"]
 exclude = ["quyuan.tests*"]
 
 [tool.setuptools.package-data]
-quyuan = ["*.svg.g", "*.json"]
+quyuan = ["*.svg.g", "*.json", "*.csv"]
 
 [tool.setuptools_scm]
 write_to = "src/quyuan/_version.py"
