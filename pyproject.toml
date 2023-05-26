@@ -30,7 +30,8 @@ dependencies = [
     "click",
     "colorama",
     "importlib_metadata; python_version<'3.8'",
-    "svg.py"
+    "pandas",
+    "svg.py",
 ]
 
 [project.optional-dependencies]
