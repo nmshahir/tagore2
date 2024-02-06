@@ -1,17 +1,17 @@
-# quyuan
+# tagore2
 
-`quyuan` is a folk of [`tagore`](https://github.com/jordanlab/tagore) with several modifications to make it more suitable for my own use.
+`tagore2` is a fork of [`quyuan`](https://github.com/tcztzy/quyuan) which is a folk of [`tagore`](https://github.com/jordanlab/tagore) with several modifications to make it more suitable for my own use.
 
 ![tagore](https://github.com/jordanlab/tagore/raw/master/tagore.png)
 
 ## Installation
 
-`quyuan` is a simple Python script with several dependencies.
+`tagore2` is a simple Python script with several dependencies.
 
 ```console
-$ pip install git+https://github.com/tcztzy/quyuan.git
-$ quyuan --version
-quyuan, version 1.1.2
+$ pip install git+https://github.com/nmshahir/tagore2.git
+$ tagore2 --version
+tagore2
 ```
 
 ### Requirements
@@ -25,15 +25,15 @@ quyuan, version 1.1.2
 The demo data consists of [Catalogue of Somatic Mutations in Cancer (COSMIC) Cancer Gene Census](https://www.nature.com/articles/s41568-018-0060-1) genes and 100 randomly simulated mutations.  Points represent single nucleotide variants (i.e. variant present in <3 samples); triangles represent single nucleotide polymorphisms (i.e. variants found in many samples); and short lines (single chromosome) represent known INDEL sites.
 
 ```console
-$ quyuan --input example_ideogram/test.bed --prefix example_ideogram/example -vf
+$ tagore2 --input example_ideogram/test.bed --prefix example_ideogram/example -vf
 ```
 
 ## Usage
 ```
-Usage: quyuan [OPTIONS]
+Usage: tagore2 [OPTIONS]
 
-  quyuan: a utility for illustrating human chromosomes
-  https://github.com/tcztzy/quyuan
+  tagore2: a utility for illustrating human chromosomes
+  https://github.com/nmshahir/tagore2
 
 Options:
   --version                       Show the version and exit.
